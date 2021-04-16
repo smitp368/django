@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>student App</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color:#4DB6AC;">
+<nav class="navbar navbar-light" style="background-color:#FF0033;">
+
+    <a class="navbar-link btn-lg" href="{% url 'index' %}" style="background-color:#FFCC33;color:#000000;">Home</a>
+<a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33;color:#000000;">Admin</a>
+    <a href="{% url 'upload-book' %}" class="navbar-link btn-lg" style="background-color:#FFCC33;color:#000000;">Upload studentdata</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for student in shelf %}
+    <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ student.picture.url }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ student.name }}</h5>
+    <p class="card-text">{{ student.email }}</p>
+   
+   <p class="card-title">{{student.contact}}</p>
+   <p class="card-text">{{ student.address }}</p>
+   <div class="card-footer bg-transparent border-dark"></div>
+   <center>
+       <a href="update/{{student.id}}" class="btn btn-warning" id = '{{student.id}}'>edit</a>
+       <a href="delete/{{student.id}}" class="btn btn-danger" id = '{{student.id}}'>delete</a>
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
